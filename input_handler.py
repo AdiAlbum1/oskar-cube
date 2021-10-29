@@ -2,6 +2,7 @@ import argparse
 import os
 import numpy as np
 
+
 def parse_input():
     parser = argparse.ArgumentParser(description='Process Oskar\'s Cube inputs')
     parser.add_argument('sx', type=int, nargs=1, help='source point - x position')
@@ -24,11 +25,13 @@ def parse_input():
 
     return sx, sy, sz, dx, dy, dz, filename
 
+
 # A simple series of tests to validate input
 def validate_input(sx, sy, sz, dx, dy, dz, filename):
     assert sx >= 0 and sy >= 0 and sz >= 0, "Invalid source point - must be non-negative position"
     assert dx >= 0 and dy >= 0 and dz >= 0, "Invalid target point - must be non-negative position"
     assert os.path.isfile(filename), "file doesn't exist"
+
 
 def parse_obstacle_file_dimensions(obstacle_file):
     first_line = obstacle_file.readline()
@@ -37,23 +40,27 @@ def parse_obstacle_file_dimensions(obstacle_file):
 
     return x_dim, y_dim, z_dim
 
+
 def parse_obstacle_file(filename):
     obstacle_file = open(filename, "r")
     x_dim, y_dim, z_dim = parse_obstacle_file_dimensions(obstacle_file)
 
     xy_plane = np.zeros((x_dim, y_dim), dtype=int)
     yz_plane = np.zeros((y_dim, z_dim), dtype=int)
-    xz_plane = np.zeros((x_dim, z_dim), dtype=int)
+    zx_plane = np.zeros((z_dim, x_dim), dtype=int)
 
     for i in range(z_dim):
-        xy_plane[i][:] = list(map(int, obstacle_file.readline().split()))
+        xy_plane[:][i] = list(map(int, obstacle_file.readline().split()))
+    xy_plane = np.transpose(xy_plane)
 
     obstacle_file.readline()
     for i in range(x_dim):
-        yz_plane[i][:] = list(map(int, obstacle_file.readline().split()))
+        yz_plane[:][i] = list(map(int, obstacle_file.readline().split()))
+    yz_plane = np.transpose(yz_plane)
 
     obstacle_file.readline()
     for i in range(y_dim):
-        xz_plane[i][:] = list(map(int, obstacle_file.readline().split()))
+        zx_plane[:][i] = list(map(int, obstacle_file.readline().split()))
+    zx_plane = np.transpose(zx_plane)
 
-    return xy_plane, yz_plane, xz_plane
+    return x_dim, y_dim, z_dim, xy_plane, yz_plane, zx_plane
