@@ -8,13 +8,11 @@ if __name__ == "__main__":
     validate_input(sx, sy, sz, dx, dy, dz, filename)
     x_dim, y_dim, z_dim, xy_plane, yz_plane, zx_plane = parse_obstacle_file(filename)
 
-    # construct free-space graph
+    # construct free-space graph, and find solution
     free_space_graph = construct_free_space_graph(x_dim, y_dim, z_dim, xy_plane, yz_plane, zx_plane)
     validate_source_point(free_space_graph, sx, sy, sz)
     validate_target_point(free_space_graph, dx, dy, dz)
-
-    # find solution
     path = find_path(free_space_graph, sx, sy, sz, dx, dy, dz)
 
-    # write solution
+    # handle output
     write_output("solution.txt", sx, sy, sz, dx, dy, dz, path)
