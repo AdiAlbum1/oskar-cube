@@ -4,3 +4,6 @@ __pycache__/
 
 # Virtual Enviorment
 venv/
+
+# Word document
+cover.docx
