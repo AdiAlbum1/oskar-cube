@@ -25,9 +25,9 @@ pip install -r requirments.txt
 python oskar.py sx sy sz dx dy dz filename
 ```
 Where:
-- sx, sy, sz are the source point's position
-- dx, dy, dz are the target point's position
-- filename is the path to obstacle description file
+- sx, sy, sz are the source point's position (integers)
+- dx, dy, dz are the target point's position (integers)
+- filename is the path to obstacle description file (string)
 
 ## Verify Results
 Results will be saved to solution.txt file, you may verify the result is correct with [The Simulator](http://www.cs.tau.ac.il/~michaelmoshe/oskar-visualization/)
