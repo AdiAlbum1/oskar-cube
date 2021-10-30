@@ -31,4 +31,4 @@ def write_output(sx, sy, sz, dx, dy, dz, path):
     else:
         for edge in edges:
             command = edge_to_command(edge)
-            print("%d " % command)
+            print("%d " % command, end =" ")

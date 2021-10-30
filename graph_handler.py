@@ -20,7 +20,7 @@ def construct_free_space_graph(x_dim, y_dim, z_dim, xy_plane, yz_plane, zx_plane
     # xy_plane illegal nodes removal
     for x_index in range(x_dim):
         for y_index in range(y_dim):
-            if xy_plane[x_index][y_index] == 1:
+            if xy_plane[y_index][x_index] == 1:
                 for z_index in range(z_dim):
                     if free_space_graph.has_node((x_index, y_index, z_index)):
                         free_space_graph.remove_node((x_index, y_index, z_index))
@@ -28,7 +28,7 @@ def construct_free_space_graph(x_dim, y_dim, z_dim, xy_plane, yz_plane, zx_plane
     # yz_plane illegal nodes removal
     for y_index in range(y_dim):
         for z_index in range(z_dim):
-            if yz_plane[y_index][z_index] == 1:
+            if yz_plane[z_index][y_index] == 1:
                 for x_index in range(x_dim):
                     if free_space_graph.has_node((x_index, y_index, z_index)):
                         free_space_graph.remove_node((x_index, y_index, z_index))
@@ -36,7 +36,7 @@ def construct_free_space_graph(x_dim, y_dim, z_dim, xy_plane, yz_plane, zx_plane
     # zx_plane illegal nodes removal
     for z_index in range(z_dim):
         for x_index in range(x_dim):
-            if zx_plane[z_index][x_index] == 1:
+            if zx_plane[x_index][z_index] == 1:
                 for y_index in range(y_dim):
                     if free_space_graph.has_node((x_index, y_index, z_index)):
                         free_space_graph.remove_node((x_index, y_index, z_index))

@@ -45,22 +45,22 @@ def parse_obstacle_file(filename):
     obstacle_file = open(filename, "r")
     x_dim, y_dim, z_dim = parse_obstacle_file_dimensions(obstacle_file)
 
-    xy_plane = np.zeros((x_dim, y_dim), dtype=int)
-    yz_plane = np.zeros((y_dim, z_dim), dtype=int)
-    zx_plane = np.zeros((z_dim, x_dim), dtype=int)
+    xy_plane = np.zeros((y_dim, x_dim), dtype=int)
+    yz_plane = np.zeros((z_dim, y_dim), dtype=int)
+    zx_plane = np.zeros((x_dim, z_dim), dtype=int)
 
+    for i in range(y_dim):
+        xy_plane[i][:] = list(map(int, obstacle_file.readline().split()))
+    # xy_plane = np.transpose(xy_plane)
+
+    obstacle_file.readline()
     for i in range(z_dim):
-        xy_plane[:][i] = list(map(int, obstacle_file.readline().split()))
-    xy_plane = np.transpose(xy_plane)
+        yz_plane[i][:] = list(map(int, obstacle_file.readline().split()))
+    # yz_plane = np.transpose(yz_plane)
 
     obstacle_file.readline()
     for i in range(x_dim):
-        yz_plane[:][i] = list(map(int, obstacle_file.readline().split()))
-    yz_plane = np.transpose(yz_plane)
-
-    obstacle_file.readline()
-    for i in range(y_dim):
-        zx_plane[:][i] = list(map(int, obstacle_file.readline().split()))
-    zx_plane = np.transpose(zx_plane)
+        zx_plane[i][:] = list(map(int, obstacle_file.readline().split()))
+    # zx_plane = np.transpose(zx_plane)
 
     return x_dim, y_dim, z_dim, xy_plane, yz_plane, zx_plane
