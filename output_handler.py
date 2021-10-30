@@ -16,23 +16,19 @@ def edge_to_command(edge):
         return 5
 
 
-def write_output(output_filename, sx, sy, sz, dx, dy, dz, path):
-    output_file = open(output_filename, "w")
-
+def write_output(sx, sy, sz, dx, dy, dz, path):
     # write source point
-    output_file.write("%d %d %d\n" % (sx, sy, sz))
+    print("%d %d %d" % (sx, sy, sz))
 
     # write target point
-    output_file.write("%d %d %d\n" % (dx, dy, dz))
+    print("%d %d %d" % (dx, dy, dz))
 
     edges = list(zip(path, path[1:]))
 
     # if no path exists - write -1 command
     if len(edges) == 0:
-        output_file.write("-1")
+        print("-1")
     else:
         for edge in edges:
             command = edge_to_command(edge)
-            output_file.write("%d " % command)
-
-    output_file.close()
+            print("%d " % command)

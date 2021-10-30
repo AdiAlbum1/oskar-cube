@@ -15,4 +15,4 @@ if __name__ == "__main__":
     path = find_path(free_space_graph, sx, sy, sz, dx, dy, dz)
 
     # handle output
-    write_output("solution.txt", sx, sy, sz, dx, dy, dz, path)
+    write_output(sx, sy, sz, dx, dy, dz, path)
