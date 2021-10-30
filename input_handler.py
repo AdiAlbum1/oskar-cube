@@ -45,6 +45,8 @@ def parse_obstacle_file(filename):
     obstacle_file = open(filename, "r")
     x_dim, y_dim, z_dim = parse_obstacle_file_dimensions(obstacle_file)
 
+    assert x_dim >= 1 and y_dim >= 1 and z_dim >= 1, "Invalid dimensions"
+
     xy_plane = np.zeros((y_dim, x_dim), dtype=int)
     yz_plane = np.zeros((z_dim, y_dim), dtype=int)
     zx_plane = np.zeros((x_dim, z_dim), dtype=int)
