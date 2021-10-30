@@ -51,16 +51,13 @@ def parse_obstacle_file(filename):
 
     for i in range(y_dim):
         xy_plane[i][:] = list(map(int, obstacle_file.readline().split()))
-    # xy_plane = np.transpose(xy_plane)
 
     obstacle_file.readline()
     for i in range(z_dim):
         yz_plane[i][:] = list(map(int, obstacle_file.readline().split()))
-    # yz_plane = np.transpose(yz_plane)
 
     obstacle_file.readline()
     for i in range(x_dim):
         zx_plane[i][:] = list(map(int, obstacle_file.readline().split()))
-    # zx_plane = np.transpose(zx_plane)
 
     return x_dim, y_dim, z_dim, xy_plane, yz_plane, zx_plane
